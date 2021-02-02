@@ -6,11 +6,11 @@
  <% request.setCharacterEncoding("UTF-8"); %>
  
  <jsp:useBean id = "user" class = "user.User" scope="page"/>
-  <jsp:setProperty name="user" property = "userID" />
+ <jsp:setProperty name="user" property = "userID" />
  <jsp:setProperty name="user" property = "userPassword" />
-  <jsp:setProperty name="user" property = "userName" />
- <jsp:setProperty name="user" property = "userGender" />
-  <jsp:setProperty name="user" property = "userEmail" />
+ <jsp:setProperty name="user" property = "checkPassword" />
+ <jsp:setProperty name="user" property = "userName" />
+ <jsp:setProperty name="user" property = "userEmail" />
 
  
 <!DOCTYPE html>
@@ -22,10 +22,16 @@
 <body>
       <%
       if(user.getUserID()==null||user.getUserPassword()==null||user.getUserName()==null||
-    		  user.getUserGender()==null|| user.getUserEmail()==null){
+    		  user.getUserEmail()==null){
     	  PrintWriter script = response.getWriter();
     	  script.println("<script>");
     	  script.println("alert('입력이 안 된 사항이 있습니다.')");
+    	  script.println("history.back()");
+    	  script.println("</script>");
+      }else if( user.getUserPassword() != user.getCheckPassword()){
+    	  PrintWriter script = response.getWriter();
+    	  script.println("<script>");
+    	  script.println("alert('비밀번호가 다릅니다.')");
     	  script.println("history.back()");
     	  script.println("</script>");
       }else{
